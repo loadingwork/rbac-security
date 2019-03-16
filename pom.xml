@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.iveiv.rbac</groupId>
-	<artifactId>rbac-security</artifactId>
+	<artifactId>rbac-security-jpa-springboot</artifactId>
 	<version>0.0.2</version>
 	<packaging>jar</packaging>
 
