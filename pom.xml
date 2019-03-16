@@ -6,11 +6,11 @@
 
 	<groupId>com.iveiv.rbac</groupId>
 	<artifactId>rbac-security-jpa-springboot</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<packaging>jar</packaging>
 
 	<name>rbac-security</name>
-	<description>rbac 权限系统  版本2</description>
+	<description>rbac 权限系统</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
