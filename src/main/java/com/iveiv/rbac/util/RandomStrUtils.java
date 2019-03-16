@@ -1,9 +1,8 @@
 package com.iveiv.rbac.util;
 
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 
-import org.apache.commons.rng.UniformRandomProvider;
-import org.apache.commons.rng.simple.RandomSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,8 +18,6 @@ public class RandomStrUtils {
 	 * 日记工具
 	 */
 	private static final Logger log = LoggerFactory.getLogger(RandomStrUtils.class);
-	
-	private final static UniformRandomProvider rng = RandomSource.create(RandomSource.MT);
 	
 	/**
 	 * 纯数字
@@ -61,10 +58,12 @@ public class RandomStrUtils {
 	 * @return
 	 */
 	public static String genCommonsStr(String str, int length, boolean isFirstNum) {
+		
+		 ThreadLocalRandom random = ThreadLocalRandom.current();
 		// 固定长度
 		final int numberLength = str.length();
 		
-		StringBuffer randomStr = Stream.generate(() -> rng.nextInt(numberLength)).limit(length).map(item -> {
+		StringBuffer randomStr = Stream.generate(() -> random.nextInt(numberLength)).limit(length).map(item -> {
 			char charAt = str.charAt(item);
 			return charAt;
 		}).reduce(new StringBuffer(), (sb, s) -> sb.append(s), StringBuffer::append);
@@ -83,7 +82,7 @@ public class RandomStrUtils {
 		
 		if (isFirstNum && randomStr.charAt(0) == 0) {
 			// 替换第一位数
-			int ranNum = rng.nextInt(numberLength - 1);
+			int ranNum = random.nextInt(numberLength - 1);
 			char charAt = str.substring(1).charAt(ranNum);
 			randomStr.setCharAt(0, charAt);
 		}
@@ -105,12 +104,13 @@ public class RandomStrUtils {
 	 */
 	@Deprecated
 	public static String genCommonsStrOld(String str, int length, boolean isFirstNum) {
+		ThreadLocalRandom random = ThreadLocalRandom.current();
 		// 固定长度
 		final int numberLength = str.length();
 		
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < length; i++) {
-			int ranInt = rng.nextInt(numberLength);
+			int ranInt = random.nextInt(numberLength);
 			// 第一位判断
 			if (i == 0 && ranInt == 0 && !isFirstNum) {
 				// 不允许第一位为0处理

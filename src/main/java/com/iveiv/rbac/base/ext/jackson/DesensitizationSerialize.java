@@ -12,14 +12,12 @@ import com.fasterxml.jackson.databind.ser.ContextualSerializer;
 import com.iveiv.rbac.base.annotation.SensitiveInfo;
 import com.iveiv.rbac.enums.DesensitizationEnum;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * 自定义脱敏序列化
  * @author irays
  *
  */
-@Slf4j
+//@Slf4j
 public class DesensitizationSerialize extends JsonSerializer<String> implements ContextualSerializer {
 	
 	/**
