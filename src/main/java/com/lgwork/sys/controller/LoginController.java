@@ -21,7 +21,6 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lgwork.enums.QrcodeProtocolEnum;
 import com.lgwork.sys.service.LoginService;
@@ -35,7 +34,6 @@ import com.lgwork.util.QrcodeUtil;
  * @author irays
  *
  */
-@RequestMapping("/login")
 @Controller
 public class LoginController {
 	
@@ -91,9 +89,13 @@ public class LoginController {
 		// 获取session
 		HttpSession session = request.getSession();
 		
-		if(StringUtils.isNotEmpty(error)) {
-			AuthenticationException exception = 
-					(AuthenticationException)session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+		AuthenticationException exception = 
+				(AuthenticationException)session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+//		设置默认值
+		modelMap.addAttribute("errmsg", "");
+		
+		if(StringUtils.isNotEmpty(error) 
+				&& exception != null) {
 			
 			if(exception instanceof UsernameNotFoundException) {
 				modelMap.addAttribute("errmsg", "用户名不存在");
@@ -108,6 +110,7 @@ public class LoginController {
 			} else if(exception instanceof BadCredentialsException) {
 				modelMap.addAttribute("errmsg", "账号或密码错误");
 			} else {
+//				发生未知错误
 				modelMap.addAttribute("errmsg", "账号或密码错误");
 			}
 			

@@ -1,5 +1,7 @@
 <#-- freemarker 常量区 -->
+<#-- springboot 暴露变量 springMacroRequestContext  -->
 <#assign ctx = springMacroRequestContext.getContextPath() >
+<#assign locale = springMacroRequestContext.locale >
 
 <!-- 
 <#setting datetime_format="yyyy-MM-dd HH:mm:ss"/>
@@ -16,3 +18,25 @@ FreeMarkerExceptionHandler
 <script type="text/javascript"  >
 	const ctx = "${ctx}";
 </script>
+
+
+<#-- 定义宏 -->
+<!-- 引入js -->
+<#macro script src="" pattern=true>
+	<#if pattern==true>
+		<script type="text/javascript" src="${springMacroRequestContext.getContextUrl('/static${src}')}"></script>
+		<#else>
+		<script type="text/javascript" src="${springMacroRequestContext.getContextUrl(src)!''}"></script>
+	</#if>
+</#macro>
+
+<!-- 引入css -->
+<#macro link href="" pattern=true>
+	<#if pattern==true>
+		<link rel="stylesheet" type="text/css" href="${springMacroRequestContext.getContextUrl('/static${href}')}" />
+		<#else>
+		<link rel="stylesheet" type="text/css" href="${springMacroRequestContext.getContextUrl(href)!''}" />
+	</#if>
+</#macro>
+
+

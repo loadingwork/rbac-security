@@ -150,7 +150,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/file/**", "/login/qrcode/img.do", "/static/**", "/token/**", "/api/**", "/myHandler/**", "/**/favicon.ico").and();
+		
+		web.ignoring().antMatchers("/file/**", "/login/qrcode/img.do", "/static/**", "/token/**", "/api/**", "/myHandler/**", "/**/favicon.ico", "/**/*.js", "/**/*.css").and();
+		
 	}
 	
 	
@@ -180,11 +182,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.csrf().disable()
 		.formLogin()
 		// 登录页面
-		.loginPage("/login/login.do")
+		.loginPage("/login.do")
 		// 虚拟登录拦截页面
-		.loginProcessingUrl("/u_login.do")
-		// 登录验证失败页面
-		.failureUrl("/login/login.do?error=error")
+		.loginProcessingUrl("/j_login.do")
+		// 重定向到登录验证失败页面
+		.failureUrl("/login.do?error=error")
+//		如果需要记住用户名, 可以使用转发
 //		.failureForwardUrl("/login/login.do?error=error")
 //		.failureHandler(userInfoAuthenticationFailureHandler())
 		// 登录成功后的页面

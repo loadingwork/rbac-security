@@ -1,121 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html  class="x-admin-sm">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>用户登录</title>
-	<link rel="stylesheet" href="${ctx}/static/css/global.css">
-    <link rel="stylesheet" href="${ctx}/static/css/login/username_login.css">
+	<meta charset="UTF-8">
+	<title>后台登录-adminV3</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    
+    <@link href="/css/font.css"  />
+    <@link href="/css/xadmin.css"  />
 </head>
-<body>
+<body class="login-bg">
+    
+    <div class="login layui-anim layui-anim-up">
+        <div class="message">管理员登录</div>
+        <div id="darkbannerwrap"></div>
+        
+        <form method="post" class="layui-form"  action="${ctx}/j_login.do" >
+            <input name="username"   type="text"  lay-verify="required" class="layui-input" placeholder="用户名" />
+            <hr class="hr15">
+            <input name="password"   type="password"  lay-verify="required"   class="layui-input" placeholder="密码" />
+            <hr class="hr15">
+            <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit" />
+            <hr class="hr20" >
+        </form>
+    </div>
 
-	<div class="g-body">
-		
-		<!-- 
-		http://localhost:8001/u_login.do
-		 -->
-		<!-- form 表单 -->
-		<form id="form-login" action="${ctx}/u_login.do"  method="POST"  >
-		<!-- 登录界面 -->
-		<div class="g-login">
+	<@script src="/lib/layui/layui.js" />
+	<@script src="/js/cookie.js" />
+	<@script src="/js/xadmin.js" />
+    <script>
+    
+    	var errmsg = '${errmsg}' || '';
+    
+        $(function  () {
+            layui.use(['form', 'layer'], function(){
+              var form = layui.form;
+              var layer = layui.layer;
+              
+              if(errmsg != '') {
+            	  layer.msg(errmsg, {
+            		  time: 3000
+            	  });
+              }
+              
+            });
+        });
 
-			<div class="m-login-header">
-				<div class="u-title">平台后台</div>
-				<div class="u-subtitle">欢迎登录</div>
-			</div>
-
-			<div class="m-login-body">
-
-				<div class="u-sign-row u-errorInfo active">
-					<div class="u-fm-error">
-						<!-- <i class="fa fa-exclamation-circle"></i> -->
-						<span>
-						${errmsg!""}
-						</span>
-					</div>
-				</div>
-
-				<div class="u-sign-row u-account">
-					<input class="username" name="username" type="text" autocomplete="off"
-						placeholder="请输入账号">
-				</div>
-
-				<div class="u-sign-row u--password">
-					<input class="password" name="password" type="password" autocomplete="off"
-						placeholder="请输入密码">
-				</div>
-				
-				<#--
-				验证码模块关闭
-				<div class="u-sign-row u-verifyCode  f-cb">
-					<input class="verifyCode" name="verifyCode" type="text"
-						placeholder="请输入验证码" />
-					<div class="u-verifyCode-img">
-						<img
-							src="http://via.placeholder.com/80x30/eeeeee/verifyCode.png?text=12x5"
-							alt="">
-					</div>
-				</div>
-				
-				-->
-				
-				<div class="u-sign-row u-memberpass">
-					<input class="remember" id="remember" name="remember-me"
-						type="checkbox"> <label for="remember">自动登录</label> <a
-						class="u-forgetpasswd" href="javascript:alert('暂时, 木有实现')">忘记密码?</a>
-				</div>
-				
-
-				<div class="u-sign-row u-login-options">
-					<a class="u-login-confirm"  href="javascript:;" onclick="submitForm()" >进入平台</a>
-				</div>
-
-
-			</div>
-
-
-			<div class="m-login-footer">
-				<div class="u-login-other">
-					<div>
-						<a href="${ctx}/login/qrcode.do">其他登录方式</a>
-					</div>
-				</div>
-			</div>
-
-
-		</div>
-		<!-- /登录界面 -->
-		</form>
-		<!-- /form 表单 -->
-
-	</div>
-
-
-	<!-- cdn -->
-	<script src="${ctx}/static/lib/jquery/jquery-1.12.4/jquery.min.js"></script>
-	<script type="text/javascript">
-	"use strict"
-	
-	// form提交
-	function submitForm() {
-		// 检查参数
-		
-		//$(".u-fm-error span").html("");
-		
-		if($(".username").val() === '') {
-			$(".u-fm-error span").html("用户名不能为空");
-			return;
-		}
-		if($(".password").val() === '') {
-			$(".u-fm-error span").html("密码不能为空");
-			return;
-		}
-		
-		$("#form-login").submit();
-	}
-	
-	</script>
-
+        
+    </script>
+    <!-- 底部结束 -->
 </body>
 </html>
