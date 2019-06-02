@@ -406,12 +406,22 @@
 			</exclusions>
 		</dependency>
 
+
 		<!-- 图片库 -->
+		<!-- 
+		检测到这个有安全问题, 暂时解除
+		CVE-2018-17202  https://nvd.nist.gov/vuln/detail/CVE-2018-17202
+		CVE-2018-17201  https://nvd.nist.gov/vuln/detail/CVE-2018-17201
 		<dependency>
 			<groupId>org.apache.sanselan</groupId>
 			<artifactId>sanselan</artifactId>
 			<version>0.97-incubator</version>
 		</dependency>
+		 -->
+		 
+		 
+		 
+		 
 		<!-- 缩略图工具 -->
 		<dependency>
 			<groupId>net.coobird</groupId>
